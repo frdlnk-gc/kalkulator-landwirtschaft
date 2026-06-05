@@ -1177,11 +1177,11 @@ src="https://www.facebook.com/tr?id=634469765867935&ev=PageView&noscript=1"
 const DE_POP = 84000000;
 
 const PROFESSIONS = [
-  { id:'landwirt',      name:'Landwirt/Facharbeiter',  fullName:'Landwirtschaftlicher Facharbeiter',           icon:'🌾', nat:130000, rate:0.16, thresh:{gut:60,mittel:25}, def:true  },
-  { id:'tierwirt',      name:'Tierwirt/Melker',        fullName:'Tierwirt – Schwerpunkt Rinder & Milch',       icon:'🐄', nat:40000, rate:0.15, thresh:{gut:30,mittel:12}, def:false },
-  { id:'agrarservice',  name:'Fachkraft Agrarservice', fullName:'Fachkraft Agrarservice / Landtechnik',        icon:'🚜', nat:28000, rate:0.14, thresh:{gut:20,mittel:8},  def:false },
-  { id:'herdenmanager', name:'Herdenmanager',          fullName:'Herdenmanager / Tierbetreuung',               icon:'🐑', nat:14000, rate:0.12, thresh:{gut:10,mittel:4},  def:false },
-  { id:'betriebsleiter',name:'Betriebsleiter Landw.',  fullName:'Betriebsleiter Landwirtschaft',               icon:'📋', nat:16000, rate:0.10, thresh:{gut:10,mittel:4},  def:false },
+  { id:'landwirt',             name:'Landwirt',             fullName:'Landwirt (Pflanzenbau & Tierhaltung)',          icon:'🌾', nat:130000, rate:0.16, thresh:{gut:60,mittel:25}, def:true  },
+  { id:'tierwirt',             name:'Tierwirt',             fullName:'Tierwirt (Rinder, Schwein & Geflügel)',         icon:'🐄', nat:40000, rate:0.15, thresh:{gut:30,mittel:12}, def:false },
+  { id:'schlepperfahrer',      name:'Schlepperfahrer',      fullName:'Schlepperfahrer (Lohnunternehmen & Hof)',       icon:'🚜', nat:30000, rate:0.16, thresh:{gut:22,mittel:9},  def:false },
+  { id:'betriebsleiter',       name:'Betriebsleiter',       fullName:'Betriebsleiter (Hofleitung)',                   icon:'📋', nat:16000, rate:0.10, thresh:{gut:10,mittel:4},  def:false },
+  { id:'landmaschinentechniker',name:'Landmaschinentechniker',fullName:'Landmaschinentechniker (Landtechnik-Mechatroniker)', icon:'🔧', nat:24000, rate:0.13, thresh:{gut:16,mittel:6},  def:false },
 ];
 
 const PLZ = {
@@ -1368,11 +1368,11 @@ function getTips(region, selIds, overallS) {
   if (region.type==='urban') tips.push({i:'🏙️', t:'Großstadtregion: Hoher Wettbewerb um Talente. Schnelle Prozesse, Benefits und ein starkes Arbeitgeberprofil sind entscheidend.'});
   else if (region.type==='rural') tips.push({i:'🌄', t:'Ländliche Region: Kandidaten sind lokal verwurzelt. Stabilität, Teamkultur und flexible Arbeitszeiten überzeugen am meisten.'});
   else tips.push({i:'🏘️', t:'Gemischte Region: Work-Life-Balance und regionaler Bezug sind die stärksten Argumente für Kandidaten.'});
-  if (selIds.includes('landwirt')||selIds.includes('tierwirt')||selIds.includes('agrarservice'))
+  if (selIds.includes('landwirt')||selIds.includes('tierwirt')||selIds.includes('schlepperfahrer'))
     tips.push({i:'🎓', t:'Kooperationen mit Berufsschulen und den DEULA-Lehranstalten und überbetrieblichen Ausbildungsstätten der Agrarwirtschaft erhöhen Ihr Kandidatenpotenzial langfristig.'});
-  if (selIds.includes('betriebsleiter')||selIds.includes('herdenmanager'))
-    tips.push({i:'📈', t:'Herdenmanager und Betriebsleiter wechseln fast nur auf deutlich bessere Konditionen. Gehalt und Entwicklungsperspektive klar benennen.'});
-  if (selIds.includes('tierwirt')||selIds.includes('landwirt')||selIds.includes('agrarservice'))
+  if (selIds.includes('betriebsleiter')||selIds.includes('landmaschinentechniker'))
+    tips.push({i:'📈', t:'Landmaschinentechniker und Betriebsleiter wechseln fast nur auf deutlich bessere Konditionen. Gehalt und Entwicklungsperspektive klar benennen.'});
+  if (selIds.includes('tierwirt')||selIds.includes('landwirt')||selIds.includes('schlepperfahrer'))
     tips.push({i:'🔧', t:'In der Landwirtschaft erhöhen klare Gehaltsangaben in der Anzeige die Bewerbungsrate nachweislich um bis zu 40 %.'});
   if (overallS==='schwach')
     tips.push({i:'🗺️', t:'Erweitern Sie Ihren Suchradius: Fachkräfte aus Nachbarregionen sind oft mobil und wechselbereit.'});

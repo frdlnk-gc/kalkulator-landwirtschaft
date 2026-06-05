@@ -594,11 +594,11 @@
           <div class="field-group">
             <label>Welche Fachkräfte suchen Sie? * (Mehrfachauswahl)</label>
             <div class="check-grid" id="profCheckGrid">
-              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="landwirt">     🌾 Landwirt/Facharbeiter</div>
-              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="tierwirt">     🐄 Tierwirt/Melker</div>
-              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="agrarservice"> 🚜 Fachkraft Agrarservice</div>
-              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="herdenmanager">🐑 Herdenmanager</div>
-              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="betriebsleiter">📋 Betriebsleiter Landw.</div>
+              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="landwirt">     🌾 Landwirt</div>
+              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="tierwirt">     🐄 Tierwirt</div>
+              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="schlepperfahrer"> 🚜 Schlepperfahrer</div>
+              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="landmaschinentechniker">🔧 Landmaschinentechniker</div>
+              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="betriebsleiter">📋 Betriebsleiter</div>
             </div>
           </div>
 
@@ -885,7 +885,7 @@ setTimeout(() => {
     sizeField.value = sizeMap[leadData.mitarbeiter];
   }
 
-  // Pre-fill profession checkboxes from calculator selection (landwirt, tierwirt, agrarservice, herdenmanager, betriebsleiter)
+  // Pre-fill profession checkboxes from calculator selection (landwirt, tierwirt, schlepperfahrer, landmaschinentechniker, betriebsleiter)
   if (leadData.selIds && leadData.selIds.length) {
     const profGrid = document.getElementById('profCheckGrid');
     if (profGrid) {
@@ -971,27 +971,27 @@ function toggleCheck(el) {
   }
 }
 
-// Branchenbenchmark je Beruf (Medianwerte brutto/Monat, Basis: Entgeltatlas BA 2024, Tarifwerke der Bauwirtschaft)
+// Branchenbenchmark je Beruf (Medianwerte brutto/Monat, Basis: Entgeltatlas BA 2024, Tarifwerke der Landwirtschaft)
 const PROF_SALARY_MEDIAN = {
   landwirt: 2900,
   tierwirt: 2950,
-  agrarservice: 2850,
-  herdenmanager: 3400,
+  schlepperfahrer: 2850,
+  landmaschinentechniker: 3400,
   betriebsleiter: 4200
 };
 const PROF_LABELS_SG = {
-  landwirt: 'Landwirt/Facharbeiter',
-  tierwirt: 'Tierwirt/Melker',
-  agrarservice: 'Fachkraft Agrarservice',
-  herdenmanager: 'Herdenmanager',
-  betriebsleiter: 'Betriebsleiter Landwirtschaft'
+  landwirt: 'Landwirt',
+  tierwirt: 'Tierwirt',
+  schlepperfahrer: 'Schlepperfahrer',
+  landmaschinentechniker: 'Landmaschinentechniker',
+  betriebsleiter: 'Betriebsleiter'
 };
 const PROF_LABELS_PL = {
   landwirt: 'Landwirte',
-  tierwirt: 'Tierwirte/Melker',
-  agrarservice: 'Fachkräfte Agrarservice',
-  herdenmanager: 'Herdenmanager',
-  betriebsleiter: 'Betriebsleiter Landwirtschaft'
+  tierwirt: 'Tierwirte',
+  schlepperfahrer: 'Schlepperfahrer',
+  landmaschinentechniker: 'Landmaschinentechniker',
+  betriebsleiter: 'Betriebsleiter'
 };
 
 function getSelectedProfs() {
@@ -1221,7 +1221,7 @@ function buildDownloadUrl() {
 
 // Kompatibilitäts-Wrapper — leitet an notifyMake weiter
 async function sendSlackNotification(type) {
-  const profNames = {landwirt:'Landwirt/Facharbeiter', tierwirt:'Tierwirt/Melker', agrarservice:'Fachkraft Agrarservice', herdenmanager:'Herdenmanager', betriebsleiter:'Betriebsleiter Landwirtschaft'};
+  const profNames = {landwirt:'Landwirt', tierwirt:'Tierwirt', schlepperfahrer:'Schlepperfahrer', landmaschinentechniker:'Landmaschinentechniker', betriebsleiter:'Betriebsleiter'};
   const probMap = {low_apps:'Zu wenige Bewerbungen', bad_quality:'Unqualifizierte Bewerber', churn:'Hohe Fluktuation', slow:'Lange Besetzungszeiten', no_brand:'Geringe Arbeitgeberbekanntheit', budget:'Begrenztes Budget'};
   const budgetMap = {low:'Unter 500 €', mid:'500–1.500 €', high:'1.500–3.000 €', premium:'Über 3.000 €'};
   const d = _companyData || {};
@@ -1399,7 +1399,7 @@ function buildInsights(d) {
   const sizeMap = {micro:'1–5 Mitarbeiter', small:'6–15 Mitarbeiter', medium:'16–30 Mitarbeiter', large:'31–50 Mitarbeiter', xlarge:'51–100 Mitarbeiter', enterprise:'Über 100 Mitarbeiter'};
   const probMap = {low_apps:'Zu wenige Bewerbungen', bad_quality:'Unqualifizierte Bewerber', churn:'Hohe Fluktuation', slow:'Lange Besetzungszeiten', no_brand:'Geringe Arbeitgeberbekanntheit', budget:'Begrenztes Budget'};
   const budgetMap = {low:'Unter 500 €/Monat', mid:'500–1.500 €/Monat', high:'1.500–3.000 €/Monat', premium:'Über 3.000 €/Monat'};
-  const profNames = {landwirt:'Landwirt/Facharbeiter', tierwirt:'Tierwirt/Melker', agrarservice:'Fachkraft Agrarservice', herdenmanager:'Herdenmanager', betriebsleiter:'Betriebsleiter Landwirtschaft'};
+  const profNames = {landwirt:'Landwirt', tierwirt:'Tierwirt', schlepperfahrer:'Schlepperfahrer', landmaschinentechniker:'Landmaschinentechniker', betriebsleiter:'Betriebsleiter'};
   const radiusMap = {'15km':'Bis 15 km','30km':'Bis 30 km','50km':'Bis 50 km','bundesweit':'Bundesweit'};
   const salaryMap = {'unter2500':'Unter 2.500 €','2500-3000':'2.500–3.000 €','3000-3500':'3.000–3.500 €','3500-4000':'3.500–4.000 €','4000-5000':'4.000–5.000 €','ueber5000':'Über 5.000 €','ueber4000':'Über 4.000 €'};
   const brandMap = {'stark':'Regional sehr bekannt','mittel':'Bekannt, nicht als Arbeitgeber','schwach':'Eher unbekannt','aufbau':'Im Aufbau'};
@@ -1444,7 +1444,7 @@ function buildStrategySteps(d) {
   });
 
   // Based on salary — kontextuelle Prüfung gegen Median der gesuchten Berufe
-  const _medians2 = { landwirt:2900, tierwirt:2950, agrarservice:2850, herdenmanager:3400, betriebsleiter:4200 };
+  const _medians2 = { landwirt:2900, tierwirt:2950, schlepperfahrer:2850, landmaschinentechniker:3400, betriebsleiter:4200 };
   const _userMids2 = { unter2500:2300, '2500-3000':2750, '3000-3500':3250, '3500-4000':3750, '4000-5000':4500, ueber5000:5500, ueber4000:4500 };
   const _profs2 = d.profs || [];
   let _targetMed = 3100;
@@ -1598,7 +1598,7 @@ function buildStrategySteps(d) {
         'Hebel 2: Monatliche 15-Minuten-Feedback-Gespräche mit dem Vorgesetzten (fester Termin, Notizen machen)',
         'Hebel 3: Kleine Anerkennungen nach Meilensteinen (z.B. 50-Euro-Gutschein nach Abschluss großes Projekt)',
         'Hebel 4 (Bonus): Transparente Gehaltslogik und jährliche Überprüfung der Marktfähigkeit',
-        'Hebel 5 (Bonus): Klare Aufstiegsperspektiven (Herdenmanager, Schichtleiter, Betriebsleiter)',
+        'Hebel 5 (Bonus): Klare Aufstiegsperspektiven (Landmaschinentechniker, Schichtleiter, Betriebsleiter)',
         'Messen Sie: Fluktuation vor und nach diesen Massnahmen nach 12 Monaten'
       ],
       callout: {
@@ -2118,10 +2118,10 @@ async function downloadPDF() {
   const scoreDims = [
     { label: 'Gehalt', score: (function(){
       // Kontextuelle Bewertung: Vergleich mit Branchen-Median der gesuchten Berufe
-      // Median brutto/Monat je Beruf (Quelle: Entgeltatlas BA 2024, Tarifwerke der Bauwirtschaft)
+      // Median brutto/Monat je Beruf (Quelle: Entgeltatlas BA 2024, Tarifwerke der Landwirtschaft)
       const medians = {
-        landwirt: 2900, tierwirt: 2950, agrarservice: 2850,
-        herdenmanager: 3400, betriebsleiter: 4200
+        landwirt: 2900, tierwirt: 2950, schlepperfahrer: 2850,
+        landmaschinentechniker: 3400, betriebsleiter: 4200
       };
       const profs = _companyData.profs || [];
       let targetMedian = 2900;
@@ -2263,7 +2263,7 @@ async function downloadPDF() {
   y += swIntroLines.length * 5 + 8;
 
   // Gehalt kontextuell bewerten (Abweichung vom erwarteten Median je Beruf)
-  const _medians = { landwirt:2900, tierwirt:2950, agrarservice:2850, herdenmanager:3400, betriebsleiter:4200 };
+  const _medians = { landwirt:2900, tierwirt:2950, schlepperfahrer:2850, landmaschinentechniker:3400, betriebsleiter:4200 };
   const _userMids = { unter2500:2300, '2500-3000':2750, '3000-3500':3250, '3500-4000':3750, '4000-5000':4500, ueber5000:5500, ueber4000:4500 };
   const _profs = _companyData.profs || [];
   let _target = 3100;
